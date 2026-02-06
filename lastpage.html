@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>For You ❤️</title>
+    <link rel="stylesheet" href="css/date.css" />
+  </head>
+  <body>
+    <h1 title="valentine">This is for you My Love Drashti❤️❤️</h1>
+
+    <form class="form-group" onsubmit="return false;">
+      <label id="status">❤️Wait For Velentine Day❤️</label>
+
+      <div>
+        <button class="button" id="openBtn" onclick="showMessage()" style="display:none;">
+          My Last Word
+        </button>
+      </div>
+    </form>
+
+    <div id="message" style="display:none; max-width:700px; margin:auto; margin-top:20px; font-size:18px; text-align:left; white-space:pre-line;">
+Happy Valentine’s Day Drashti❤️❤️.
+
+I know we both understand this may be our last Valentine together, and that our future is not together. I am not trying to change anything or put pressure on you.
+
+What we shared was real and meaningful to me, and I will always respect you and the time we had. Even if our paths are going in different directions, you will always have a special place in my heart.
+
+If you are comfortable with it, I would love to spend some quality time together today. I would really like to spend this Valentine’s Day in your arms, just being close, talking, and sharing a few quiet moments. I don’t expect anything more than that.
+
+Thank you for everything we shared. I wish you peace and happiness, today and always.
+
+I love you to the Square of infinity Drashti❤️❤️
+    </div>
+
+    <script>
+      function checkDate() {
+        const today = new Date();
+        const day = today.getDate();
+        const month = today.getMonth() + 1; // February = 2
+
+        if (day === 14 && month === 2) {
+          document.getElementById("status").innerText = "Happy Valentine’s Day Drashti❤️❤️";
+          document.getElementById("openBtn").style.display = "inline-block";
+        } else {
+          document.getElementById("status").innerText =
+            "❤️Wait For Velentine Day❤️";
+        }
+      }
+
+      function showMessage() {
+        document.getElementById("message").style.display = "block";
+        document.getElementById("openBtn").style.display = "none";
+      }
+
+      checkDate();
+    </script>
+  </body>
+</html>
+
