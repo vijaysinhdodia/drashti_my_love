@@ -70,8 +70,29 @@
         >
       </div>
     </div>
-    <button class="button" onclick="location.href='lastpage.html'">
-      Last Msg Dika
-    </button>
+    <button class="button" id="submit-all">Last Msg Dika</button>
+
+<script>
+  const scriptURL = 'https://script.google.com/macros/s/AKfycbw5GJ_ZNymMm3cYwvs5Sy7O2JsVG8u49ONEJeoOqxuf7cu1l6p7U-VDLmwHaRLYX9CwHg/exec';
+
+  document.getElementById('submit-all').addEventListener('click', () => {
+    // 1. Get current page selections
+    const activityList = Array.from(document.querySelectorAll('input[name="activities"]:checked')).map(cb => cb.value).join(', ');
+    
+    // 2. Prepare the full data package
+    const formData = new FormData();
+    formData.append('Food', localStorage.getItem('food') || 'None');
+    formData.append('Dessert', localStorage.getItem('dessert') || 'None');
+    formData.append('Activities', activityList);
+
+    // 3. Send to Google Sheets
+    fetch(scriptURL, { method: 'POST', body: formData })
+      .then(response => {
+        // 4. Redirect to the last page after success
+        location.href = 'lastpage.html';
+      })
+      .catch(error => alert('Error!', error.message));
+  });
+</script>
   </body>
 </html>
