@@ -70,8 +70,41 @@
         >
       </div>
     </div>
-    <button class="button" onclick="location.href='lastpage.html'">
-      Last Msg Dika
-    </button>
+    <button class="button" type="button" onclick="submitAll()">
+  Last Msg Dika
+</button>
+
+<script>
+  function submitAll() {
+    const checked = document.querySelectorAll('input[name="activities"]:checked');
+    const activities = Array.from(checked).map(cb => cb.value);
+
+    if (activities.length === 0) {
+      alert("Please select at least one activity");
+      return;
+    }
+
+    localStorage.setItem("activities", JSON.stringify(activities));
+
+    const food = JSON.parse(localStorage.getItem("food") || "[]").join(", ");
+    const dessert = JSON.parse(localStorage.getItem("dessert") || "[]").join(", ");
+    const acts = activities.join(", ");
+
+    const formUrl = "https://docs.google.com/forms/d/e/1wQqzlwAlDlaiicHmSMF_97CFaN5IdzKShXQcX40IceE/formResponse";
+
+    const formData = new FormData();
+    formData.append("entry.333587400", food);     // Food ID
+    formData.append("entry.1736466398", dessert);  // Dessert ID
+    formData.append("entry.543065976", acts);     // Activities ID
+
+    fetch(formUrl, {
+      method: "POST",
+      mode: "no-cors",
+      body: formData
+    }).then(() => {
+      window.location.href = "lastpage.html";
+    });
+  }
+</script>
   </body>
 </html>
