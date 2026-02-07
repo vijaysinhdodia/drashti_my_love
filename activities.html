@@ -70,28 +70,35 @@
         >
       </div>
     </div>
-    <button class="button" id="submit-all">Last Msg Dika</button>
+    <button class="button" type="button" id="final-submit">Last Msg Dika</button>
 
 <script>
-  const scriptURL = 'https://script.google.com/macros/s/AKfycbw5GJ_ZNymMm3cYwvs5Sy7O2JsVG8u49ONEJeoOqxuf7cu1l6p7U-VDLmwHaRLYX9CwHg/exec';
-
-  document.getElementById('submit-all').addEventListener('click', () => {
-    // 1. Get current page selections
-    const activityList = Array.from(document.querySelectorAll('input[name="activities"]:checked')).map(cb => cb.value).join(', ');
+  document.getElementById('final-submit').addEventListener('click', function() {
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbw5GJ_ZNymMm3cYwvs5Sy7O2JsVG8u49ONEJeoOqxuf7cu1l6p7U-VDLmwHaRLYX9CwHg/exec'; // <--- PASTE YOUR URL HERE
     
-    // 2. Prepare the full data package
-    const formData = new FormData();
-    formData.append('Food', localStorage.getItem('food') || 'None');
-    formData.append('Dessert', localStorage.getItem('dessert') || 'None');
-    formData.append('Activities', activityList);
+    // Get activities from current page
+    const activities = Array.from(document.querySelectorAll('input[name="activities"]:checked')).map(cb => cb.value).join(', ');
+    
+    // Get food and dessert from memory
+    const food = localStorage.getItem('food') || 'None';
+    const dessert = localStorage.getItem('dessert') || 'None';
 
-    // 3. Send to Google Sheets
-    fetch(scriptURL, { method: 'POST', body: formData })
-      .then(response => {
-        // 4. Redirect to the last page after success
-        location.href = 'lastpage.html';
-      })
-      .catch(error => alert('Error!', error.message));
+    // Create the data to send
+    const formData = new URLSearchParams();
+    formData.append('food', food);
+    formData.append('dessert', dessert);
+    formData.append('activities', activities);
+
+    // Send to Google Sheets
+    fetch(scriptURL, { 
+      method: 'POST', 
+      body: formData,
+      mode: 'no-cors' // This helps prevent browser blocks
+    })
+    .then(() => {
+      window.location.href = 'lastpage.html';
+    })
+    .catch(error => alert('Error: ' + error.message));
   });
 </script>
   </body>
