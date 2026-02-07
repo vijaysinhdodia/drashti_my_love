@@ -46,23 +46,9 @@
         >
       </div>
     </div>
-    <button class="button" type="button" onclick="submitDessert()">
-  Or Bhi hain Shree Saakhi
-</button>
-
-<script>
-  function submitDessert() {
-    const checked = document.querySelectorAll('input[name="dessert"]:checked');
-    const selected = Array.from(checked).map(cb => cb.value);
-
-    if (selected.length === 0) {
-      alert("Please select at least one dessert");
-      return;
-    }
-
-    localStorage.setItem("dessert", JSON.stringify(selected));
-    window.location.href = "activities.html";
-  }
-</script>
+    <button class="button" onclick="location.href='activities.html'">
+      Or Bhi hain Shree Saakhi
+	 
+    </button>
   </body>
 </html>
