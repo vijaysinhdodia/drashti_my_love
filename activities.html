@@ -70,41 +70,44 @@
         >
       </div>
     </div>
-    <button class="button" type="button" onclick="submitAll()">
+<button class="button" type="button" onclick="submitAll()">
   Last Msg Dika
 </button>
 
 <script>
   function submitAll() {
-    const checked = document.querySelectorAll('input[name="activities"]:checked');
-    const activities = Array.from(checked).map(cb => cb.value);
+    // Get stored food & dessert
+    const food = JSON.parse(localStorage.getItem("food") || "[]").join(", ");
+    const dessert = JSON.parse(localStorage.getItem("dessert") || "[]").join(", ");
 
-    if (activities.length === 0) {
-      alert("Please select at least one activity");
+    // Get selected activities
+    const checked = document.querySelectorAll('input[name="activities"]:checked');
+    const acts = Array.from(checked).map(cb => cb.value).join(", ");
+
+    if (!acts) {
+      alert("Please select at least one activity 😊");
       return;
     }
 
-    localStorage.setItem("activities", JSON.stringify(activities));
-
-    const food = JSON.parse(localStorage.getItem("food") || "[]").join(", ");
-    const dessert = JSON.parse(localStorage.getItem("dessert") || "[]").join(", ");
-    const acts = activities.join(", ");
-
-    const formUrl = "https://docs.google.com/forms/d/e/1wQqzlwAlDlaiicHmSMF_97CFaN5IdzKShXQcX40IceE/formResponse";
+    const formUrl =
+      "https://docs.google.com/forms/d/e/1wQqzlwAlDlaiicHmSMF_97CFaN5IdzKShXQcX40IceE/formResponse";
 
     const formData = new FormData();
-    formData.append("entry.333587400", food);     // Food ID
-    formData.append("entry.1736466398", dessert);  // Dessert ID
-    formData.append("entry.543065976", acts);     // Activities ID
+    formData.append("entry.333587400", food);        // Food
+    formData.append("entry.1736466398", dessert);    // Dessert
+    formData.append("entry.543065976", acts);        // Activities
 
     fetch(formUrl, {
       method: "POST",
       mode: "no-cors",
       body: formData
     }).then(() => {
+      // Optional: clear storage after submit
+      // localStorage.clear();
       window.location.href = "lastpage.html";
     });
   }
 </script>
+
   </body>
 </html>
