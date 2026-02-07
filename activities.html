@@ -80,31 +80,9 @@
   <input type="hidden" name="entry.1736466398" id="dessertField">
   <input type="hidden" name="entry.543065976" id="activitiesField">
 
-  <button class="button" type="submit">
-    Last Msg Dika
-  </button>
-</form>
-
-<script>
-  function prepareAndSubmit() {
-    const food = JSON.parse(localStorage.getItem("food") || "[]").join(", ");
-    const dessert = JSON.parse(localStorage.getItem("dessert") || "[]").join(", ");
-
-    const checked = document.querySelectorAll('input[name="activities"]:checked');
-    const acts = Array.from(checked).map(cb => cb.value).join(", ");
-
-    if (!acts) {
-      alert("Please select at least one activity 😊");
-      return false; // stop submit
-    }
-
-    document.getElementById("foodField").value = food;
-    document.getElementById("dessertField").value = dessert;
-    document.getElementById("activitiesField").value = acts;
-
-    return true; // allow submit
-  }
-</script>
+  <button class="button" onclick="location.href='lastpage.html'">
+      Last Msg Dika
+    </button>
 
 
   </body>
