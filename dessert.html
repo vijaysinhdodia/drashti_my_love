@@ -46,9 +46,16 @@
         >
       </div>
     </div>
-    <button class="button" onclick="location.href='activities.html'">
-      Or Bhi hain Shree Saakhi
-	 
-    </button>
+   <button class="button" onclick="saveAndNext('dessert', 'activities.html')">
+  Or Bhi hain Shree Saakhi
+</button>
+
+<script>
+  function saveAndNext(key, nextRow) {
+    const selected = Array.from(document.querySelectorAll('input[name="dessert"]:checked')).map(cb => cb.value);
+    localStorage.setItem(key, selected.join(', '));
+    location.href = nextRow;
+  }
+</script>
   </body>
 </html>
