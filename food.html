@@ -56,8 +56,16 @@
         <label><input type="checkbox" name="food" value="sushi" /> Dosa</label>
       </div>
     </div>
-     <button class="button" onclick="location.href='dessert.html'">
-      Abhi Baki Hain Shree Saakhi
-    </button>
+     <button class="button" onclick="saveAndNext('food', 'dessert.html')">
+  Abhi Baki Hain Shree Saakhi
+</button>
+
+<script>
+  function saveAndNext(key, nextRow) {
+    const selected = Array.from(document.querySelectorAll('input[name="food"]:checked')).map(cb => cb.value);
+    localStorage.setItem(key, selected.join(', '));
+    location.href = nextRow;
+  }
+</script>
   </body>
 </html>
