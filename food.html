@@ -56,23 +56,8 @@
         <label><input type="checkbox" name="food" value="sushi" /> Dosa</label>
       </div>
     </div>
-     <button class="button" type="button" onclick="submitFood()">
-  Abhi Baki Hain Shree Saakhi
-</button>
-
-<script>
-  function submitFood() {
-    const checked = document.querySelectorAll('input[name="food"]:checked');
-    const selected = Array.from(checked).map(cb => cb.value);
-
-    if (selected.length === 0) {
-      alert("Please select at least one food");
-      return;
-    }
-
-    localStorage.setItem("food", JSON.stringify(selected));
-    window.location.href = "dessert.html";
-  }
-</script>
+     <button class="button" onclick="location.href='dessert.html'">
+      Abhi Baki Hain Shree Saakhi
+    </button>
   </body>
 </html>
